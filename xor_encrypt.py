@@ -66,30 +66,13 @@ def xor(crypt, string1, IV):#encryption with XOR
     xor_text.insert(INSERT,"Encrypting: " + string1 + "\n")
     xor_text.insert(INSERT,"With salt: " + str(IV) +"\n")
     xor_text.insert(INSERT, "\n+--------------------------+"+"\n")
-    xor_text.insert(INSERT, "Encrypted with XOR: " + encrypted + "\n")
+    xor_text.insert(INSERT, "Encrypted.txt is saved in the local folder\n")
     xor_text.insert(INSERT, "\n+--------------------------+")
     xor_text.grid(row=6, column=1)
 
     f = open("encrypted.txt", "wb+")
-    f.write(encrypted)
+    f.write(encrypted.encode("hex"))
     f.close()
-    decrypt(encrypted, crypt)
-
-
-def decrypt(encrypted, crypt):#Decryption with XOR
-    for i in range(len(encrypted)):
-        crypt[i] ^= key_ord[i]
-
-    decrypted =  ''.join(map(chr,crypt))
-    f = open("decrypted.txt", "wb+")
-    f.write(decrypted[32:])
-    f.close()
-
-    xor_text.insert(INSERT,"\n" + "Decrypted w/o salt: " + decrypted[32:] + "\n")
-    xor_text.insert(INSERT, "+--------------------------+")
-    xor_text.insert(INSERT,"\n" + "Encrypted.txt and Decrypted.txt are saved in the local folder" +"\n")
-    xor_text.insert(INSERT, "+--------------------------+")
-    xor_text.grid(row=6, column=1)
 
     del IV_ord[:]
     del string_ord[:]
